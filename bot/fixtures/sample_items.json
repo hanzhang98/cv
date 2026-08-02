@@ -1,0 +1,100 @@
+[
+  {
+    "id": "fx001",
+    "source_type": "substack",
+    "source_name": "Semianalysis",
+    "title": "CXMT DRAM ramp and what it means for Micron and SK Hynix HBM allocation",
+    "summary": "Channel checks suggest CXMT is accelerating commodity DRAM capacity. That is a headwind for mainstream DRAM pricing, while HBM scarcity remains a catalyst for Micron and SK Hynix as AI server demand absorbs supply. Variant perception: memory stocks may bifurcate between HBM winners and commodity laggards.",
+    "url": "https://www.semianalysis.com/p/cxmt-dram-ramp-hbm",
+    "author": "Semianalysis",
+    "published_at": "2026-08-01T14:00:00+00:00",
+    "source_weight": 1.1,
+    "tags": ["semiconductors", "ai"]
+  },
+  {
+    "id": "fx002",
+    "source_type": "twitter",
+    "source_name": "@dylan522p",
+    "title": "Kimi / Moonshot model quality jump is an inference demand catalyst — watch NVDA and hyperscaler AI capex digestion",
+    "summary": "Moonshot Kimi release looks competitive on long-context. Thesis: open China models are a headwind for closed API pricing but a catalyst for token volumes and accelerator utilization. Risk/reward still favors infra over apps near-term.",
+    "url": "https://x.com/dylan522p/status/1001",
+    "author": "dylan522p",
+    "published_at": "2026-08-01T18:30:00+00:00",
+    "source_weight": 1.1,
+    "tags": ["semiconductors", "ai"]
+  },
+  {
+    "id": "fx003",
+    "source_type": "substack",
+    "source_name": "Net Interest",
+    "title": "Prime broker survey: crowded long unwind in mega-cap tech, CTA positioning still net long",
+    "summary": "Hedge fund positioning remains extended. 13F seasonality aside, prime broker data shows a crowded trade in AI leaders. Catalyst for a squeeze if CTAs stay long; headwind if deleveraging hits.",
+    "url": "https://netinterest.substack.com/p/crowded-ai-positioning",
+    "author": "Net Interest",
+    "published_at": "2026-07-31T09:00:00+00:00",
+    "source_weight": 0.95,
+    "tags": ["finance"]
+  },
+  {
+    "id": "fx004",
+    "source_type": "twitter",
+    "source_name": "@WSBmod",
+    "title": "MU TO THE MOON 🚀🚀 diamond hands YOLO memory is going 100x",
+    "summary": "Not financial advice but buy MU ape tendies guaranteed insane upside short squeeze incoming. Also something about HBM and Micron.",
+    "url": "https://x.com/WSBmod/status/1002",
+    "author": "WSBmod",
+    "published_at": "2026-08-01T20:00:00+00:00",
+    "source_weight": 0.25,
+    "noise_bias": 0.7,
+    "tags": ["retail", "noise"]
+  },
+  {
+    "id": "fx005",
+    "source_type": "substack",
+    "source_name": "ChinaTalk",
+    "title": "Export controls, SMIC, and Huawei Ascend: localization as a China tech catalyst",
+    "summary": "Policy headwind from entity list expansion vs localization mandate as a domestic champion catalyst. Channel checks on Ascend supply chain and subsidy intensity.",
+    "url": "https://www.chinatalk.media/p/export-controls-ascend",
+    "author": "ChinaTalk",
+    "published_at": "2026-08-01T16:00:00+00:00",
+    "source_weight": 0.95,
+    "tags": ["china", "policy"]
+  },
+  {
+    "id": "fx006",
+    "source_type": "twitter",
+    "source_name": "@macroalf",
+    "title": "Buy-side positioning: risk parity and CTA flows into utilities as data center power demand rises",
+    "summary": "Nuclear / SMR narrative is noisy but grid and gas utilities see real PPAs. Base case: power scarcity is a multi-year catalyst; permitting delays are the headwind.",
+    "url": "https://x.com/macroalf/status/1003",
+    "author": "macroalf",
+    "published_at": "2026-08-01T11:15:00+00:00",
+    "source_weight": 0.9,
+    "tags": ["macro", "positioning"]
+  },
+  {
+    "id": "fx007",
+    "source_type": "twitter",
+    "source_name": "@zerohedge",
+    "title": "FOMO melt-up continues as retail piles into meme AI names must buy now",
+    "summary": "Markets are insane upside forever until they aren't. Pumping continues. Barely mentions NVIDIA.",
+    "url": "https://x.com/zerohedge/status/1004",
+    "author": "zerohedge",
+    "published_at": "2026-08-01T12:00:00+00:00",
+    "source_weight": 0.45,
+    "noise_bias": 0.35,
+    "tags": ["markets", "noise"]
+  },
+  {
+    "id": "fx008",
+    "source_type": "substack",
+    "source_name": "Asianometry",
+    "title": "HBM3E yield race: Samsung memory vs SK Hynix and the AI server bill of materials",
+    "summary": "HBM allocation remains tight. Capacity expansion announcements are a medium-term headwind for pricing but near-term ASP support is a catalyst for memory names leveraged to AI.",
+    "url": "https://www.asianometry.com/p/hbm3e-yield-race",
+    "author": "Asianometry",
+    "published_at": "2026-07-31T10:00:00+00:00",
+    "source_weight": 1.0,
+    "tags": ["semiconductors", "china"]
+  }
+]
