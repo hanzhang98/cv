@@ -2,6 +2,66 @@
 # Scoring looks for these tokens in titles + body snippets.
 
 themes:
+  markets_macro:
+    label: "Markets / Macro"
+    description: "Broad equities, rates, credit, valuation, liquidity, and cross-asset market structure."
+    keywords:
+      - equity market
+      - stock market
+      - risk premium
+      - equity risk premium
+      - valuation
+      - multiples
+      - earnings yield
+      - bond market
+      - treasury
+      - yield curve
+      - rate cut
+      - rate hike
+      - Fed
+      - FOMC
+      - liquidity
+      - credit spread
+      - high yield
+      - investment grade
+      - recession
+      - soft landing
+      - stagflation
+      - inflation
+      - CPI
+      - PCE
+      - unemployment
+      - housing market
+      - mortgage
+      - drawdown
+      - bear market
+      - bull market
+      - market breadth
+      - volatility
+      - VIX
+      - positioning
+      - flows
+      - ETF
+      - private credit
+      - IPO
+      - buyback
+      - dividends
+      - S&P
+      - Nasdaq
+      - Mag7
+      - Magnificent Seven
+    tickers: [SPY, QQQ, IWM, TLT, HYG]
+    catalysts:
+      - Fed pivot
+      - earnings season
+      - liquidity impulse
+      - breadth thrust
+    headwinds:
+      - tighter financial conditions
+      - recession risk
+      - valuation compression
+      - credit stress
+
   memory_semiconductors:
     label: "Memory / Semiconductors"
     description: "DRAM/HBM/NAND supply, China memory (CXMT), HBM scarcity, AI server memory."

@@ -68,7 +68,17 @@ class SubstackIngester:
         weight = float(feed.get("weight", 1.0))
         tags = list(feed.get("tags") or [])
         try:
-            resp = await client.get(url, headers={"User-Agent": "InvestmentIdeasBot/0.1"})
+            resp = await client.get(
+                url,
+                headers={
+                    # Browser-like UA: many newsletter hosts block generic bots / DC IPs.
+                    "User-Agent": (
+                        "Mozilla/5.0 (compatible; InvestmentIdeasBot/0.2; "
+                        "+https://github.com/hanzhang98/cv)"
+                    ),
+                    "Accept": "application/rss+xml, application/xml, text/xml, */*",
+                },
+            )
             resp.raise_for_status()
             parsed = feedparser.parse(resp.text)
         except Exception:  # noqa: BLE001 — soft-fail per feed

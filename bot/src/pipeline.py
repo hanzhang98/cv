@@ -85,6 +85,26 @@ class IdeaPipeline:
             pub = pub.replace(tzinfo=timezone.utc)
         return pub >= cutoff
 
+    def _diversify(self, scored: list[ScoredIdea], limit: int, per_source: int = 2) -> list[ScoredIdea]:
+        """Keep ranking but avoid one newsletter dominating the digest."""
+        picked: list[ScoredIdea] = []
+        counts: dict[str, int] = {}
+        deferred: list[ScoredIdea] = []
+        for idea in scored:
+            src = idea.item.source_name
+            if counts.get(src, 0) < per_source:
+                picked.append(idea)
+                counts[src] = counts.get(src, 0) + 1
+            else:
+                deferred.append(idea)
+            if len(picked) >= limit:
+                return picked
+        for idea in deferred:
+            if len(picked) >= limit:
+                break
+            picked.append(idea)
+        return picked
+
     async def digest(
         self,
         theme_id: str | None = None,
@@ -100,7 +120,7 @@ class IdeaPipeline:
                 if any(h.theme_id == theme_id for h in s.theme_hits)
             ]
         n = limit or self.max_items
-        return scored[:n]
+        return self._diversify(scored, n, per_source=2)
 
     def list_themes(self) -> list[tuple[str, str, str]]:
         themes = self.themes_cfg.get("themes") or {}
