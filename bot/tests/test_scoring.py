@@ -131,3 +131,73 @@ async def test_theme_filter():
 def test_fixtures_load():
     items = load_fixtures()
     assert len(items) >= 5
+
+
+def test_lookback_drops_old_articles():
+    from datetime import datetime, timedelta, timezone
+
+    from pipeline import IdeaPipeline
+
+    pipe = IdeaPipeline()
+    assert pipe.lookback_hours > 0
+    now = datetime.now(timezone.utc)
+    fresh = RawItem(
+        id="fresh",
+        source_type=SourceType.SUBSTACK,
+        source_name="t",
+        title="Fresh Fed rate cut thesis",
+        summary="Markets react to FOMC.",
+        url="https://example.com/fresh",
+        published_at=now - timedelta(days=2),
+    )
+    stale = RawItem(
+        id="stale",
+        source_type=SourceType.SUBSTACK,
+        source_name="t",
+        title="Old Fed rate cut thesis from spring",
+        summary="Markets react to FOMC.",
+        url="https://example.com/stale",
+        published_at=now - timedelta(days=60),
+    )
+    assert pipe._within_lookback(fresh)
+    assert not pipe._within_lookback(stale)
+    assert not pipe._within_lookback(
+        RawItem(
+            id="undated",
+            source_type=SourceType.SUBSTACK,
+            source_name="t",
+            title="No date",
+            url="https://example.com/undated",
+        )
+    )
+
+
+def test_recency_boost_prefers_newer(themes_cfg, sources_cfg):
+    from datetime import datetime, timedelta, timezone
+
+    scorer = IdeaScorer(themes_cfg, sources_cfg)
+    now = datetime.now(timezone.utc)
+    fresh = RawItem(
+        id="f",
+        source_type=SourceType.SUBSTACK,
+        source_name="Net Interest",
+        title="Fed liquidity and equity risk premium positioning",
+        summary="Valuation and FOMC flows in the stock market.",
+        url="https://example.com/f",
+        source_weight=1.0,
+        published_at=now - timedelta(hours=12),
+    )
+    older = RawItem(
+        id="o",
+        source_type=SourceType.SUBSTACK,
+        source_name="Net Interest",
+        title="Fed liquidity and equity risk premium positioning",
+        summary="Valuation and FOMC flows in the stock market.",
+        url="https://example.com/o",
+        source_weight=1.0,
+        published_at=now - timedelta(days=10),
+    )
+    s_fresh = scorer.score_one(fresh, now=now)
+    s_older = scorer.score_one(older, now=now)
+    assert s_fresh and s_older
+    assert s_fresh.score > s_older.score

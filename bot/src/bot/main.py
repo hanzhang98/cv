@@ -102,7 +102,7 @@ async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         f"Substack feeds: {n_sub}\n"
         f"Twitter accounts: {n_tw}\n"
         f"Twitter API: {'yes' if settings.twitter_bearer_token else 'no (fixtures/demo)'}\n"
-        f"Lookback: {pipe.lookback_hours}h"
+        f"Lookback: {pipe.lookback_hours}h (~{pipe.lookback_hours / 24:.0f}d) + recency boost"
     )
 
 

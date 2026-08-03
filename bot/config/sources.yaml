@@ -163,5 +163,9 @@ scoring:
   noise_penalty_cap: 0.55
   source_weight_floor: 0.2
   max_items_per_digest: 12
-  # 0 = no date filter (RSS already returns each feed's latest posts).
-  lookback_hours: 0
+  # Hard drop anything older than this (markets move fast).
+  lookback_hours: 336  # 14 days
+  # Extra score for fresher posts inside the window.
+  recency_full_boost_hours: 48   # full boost if <= 2 days old
+  recency_half_life_hours: 168   # boost fades over ~7 days
+  recency_max_boost: 0.18

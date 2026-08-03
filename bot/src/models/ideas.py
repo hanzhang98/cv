@@ -64,9 +64,13 @@ class ScoredIdea(BaseModel):
         heads = list(dict.fromkeys(heads))[:3]
         tickers = list(dict.fromkeys(tickers))[:6]
 
+        when = ""
+        if self.item.published_at is not None:
+            when = self.item.published_at.astimezone().strftime("%Y-%m-%d")
         lines = [
             f"<b>{_esc(self.item.title)}</b>",
-            f"Theme: {_esc(themes)} · Score: {self.score:.2f}",
+            f"Theme: {_esc(themes)} · Score: {self.score:.2f}"
+            + (f" · {when}" if when else ""),
             f"Source: {_esc(self.item.source_name)} ({self.item.source_type.value})",
         ]
         if tickers:

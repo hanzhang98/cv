@@ -41,16 +41,23 @@ async def cmd_digest(theme: str | None, limit: int, as_json: bool) -> None:
     table = Table(title="Investment idea digest", show_lines=True)
     table.add_column("Score", justify="right", width=6)
     table.add_column("Noise", justify="right", width=5)
-    table.add_column("Theme", width=22)
+    table.add_column("Date", width=10)
+    table.add_column("Theme", width=20)
     table.add_column("Title")
     table.add_column("Source", width=16)
     for i in ideas:
         theme_label = i.primary_theme or "—"
+        when = (
+            i.item.published_at.astimezone().strftime("%Y-%m-%d")
+            if i.item.published_at
+            else "—"
+        )
         table.add_row(
             f"{i.score:.2f}",
             f"{i.noise_score:.2f}",
+            when,
             theme_label,
-            i.item.title[:80],
+            i.item.title[:70],
             i.item.source_name[:16],
         )
     console.print(table)
