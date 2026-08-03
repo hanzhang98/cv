@@ -203,7 +203,13 @@ def main() -> None:
         )
     app = build_app(settings.telegram_bot_token)
     logger.info("Starting bot mode=%s", settings.bot_mode)
-    app.run_polling(allowed_updates=Update.ALL_TYPES)
+    app.run_polling(
+        allowed_updates=Update.ALL_TYPES,
+        drop_pending_updates=True,
+        poll_interval=2.0,
+        timeout=30,
+        bootstrap_retries=5,
+    )
 
 
 if __name__ == "__main__":

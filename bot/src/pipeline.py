@@ -75,6 +75,8 @@ class IdeaPipeline:
         return items
 
     def _within_lookback(self, item: RawItem) -> bool:
+        if not self.lookback_hours or self.lookback_hours <= 0:
+            return True
         if item.published_at is None:
             return True
         cutoff = datetime.now(timezone.utc) - timedelta(hours=self.lookback_hours)

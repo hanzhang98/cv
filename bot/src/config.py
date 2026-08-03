@@ -63,3 +63,10 @@ def load_themes() -> dict[str, Any]:
 @lru_cache
 def load_sources() -> dict[str, Any]:
     return load_yaml(CONFIG_DIR / "sources.yaml")
+
+
+def reload_config() -> None:
+    """Clear cached settings/YAML (useful after .env or config edits)."""
+    get_settings.cache_clear()
+    load_themes.cache_clear()
+    load_sources.cache_clear()

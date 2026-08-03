@@ -90,4 +90,6 @@ scoring:
   noise_penalty_cap: 0.55   # never cut score by more than this from noise alone
   source_weight_floor: 0.2
   max_items_per_digest: 12
-  lookback_hours: 72
+  # 0 = no date filter (RSS already returns each feed's latest posts).
+  # Set e.g. 168 for a 7-day Twitter-focused window later.
+  lookback_hours: 0
