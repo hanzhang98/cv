@@ -1,0 +1,229 @@
+# Thematic maps: catalysts, headwinds, and related tickers / names.
+# Scoring looks for these tokens in titles + body snippets.
+
+themes:
+  markets_macro:
+    label: "Markets / Macro"
+    description: "Broad equities, rates, credit, valuation, liquidity, and cross-asset market structure."
+    keywords:
+      - equity market
+      - stock market
+      - risk premium
+      - equity risk premium
+      - valuation
+      - multiples
+      - earnings yield
+      - bond market
+      - treasury
+      - yield curve
+      - rate cut
+      - rate hike
+      - Fed
+      - FOMC
+      - liquidity
+      - credit spread
+      - high yield
+      - investment grade
+      - recession
+      - soft landing
+      - stagflation
+      - inflation
+      - CPI
+      - PCE
+      - unemployment
+      - housing market
+      - mortgage
+      - drawdown
+      - bear market
+      - bull market
+      - market breadth
+      - volatility
+      - VIX
+      - positioning
+      - flows
+      - ETF
+      - private credit
+      - IPO
+      - buyback
+      - dividends
+      - S&P
+      - Nasdaq
+      - Mag7
+      - Magnificent Seven
+    tickers: [SPY, QQQ, IWM, TLT, HYG]
+    catalysts:
+      - Fed pivot
+      - earnings season
+      - liquidity impulse
+      - breadth thrust
+    headwinds:
+      - tighter financial conditions
+      - recession risk
+      - valuation compression
+      - credit stress
+
+  memory_semiconductors:
+    label: "Memory / Semiconductors"
+    description: "DRAM/HBM/NAND supply, China memory (CXMT), HBM scarcity, AI server memory."
+    keywords:
+      - CXMT
+      - HBM
+      - HBM3
+      - HBM3E
+      - DRAM
+      - GDDR
+      - NAND
+      - Micron
+      - SK Hynix
+      - Samsung memory
+      - memory shortage
+      - memory pricing
+      - capacity expansion
+    tickers: [MU, SKHYN, "000660", "005930"]
+    catalysts:
+      - CXMT ramp
+      - HBM allocation
+      - pricing upcycle
+      - AI server demand
+    headwinds:
+      - China oversupply
+      - CXMT competition
+      - inventory correction
+      - ASP decline
+
+  ai_models_infra:
+    label: "AI Models & Infra"
+    description: "Frontier models, inference demand, GPU/accelerator spend, China AI (Kimi, DeepSeek)."
+    keywords:
+      - Kimi
+      - KIMI
+      - Moonshot
+      - DeepSeek
+      - Claude
+      - GPT
+      - LLM
+      - inference
+      - AI capex
+      - data center
+      - NVIDIA
+      - GB200
+      - Blackwell
+      - token economics
+    tickers: [NVDA, AMD, AVGO, TSM, MSFT, GOOGL, META]
+    catalysts:
+      - model release
+      - inference demand surge
+      - hyperscaler capex
+      - agent adoption
+    headwinds:
+      - open-source model competition
+      - capex digestion
+      - China export controls
+      - power constraints
+
+  buy_side_positioning:
+    label: "Hedge Fund / Buy-Side Positioning"
+    description: "13F, activist letters, crowded longs/shorts, prime broker surveys."
+    keywords:
+      - 13F
+      - hedge fund
+      - positioning
+      - crowded trade
+      - activist
+      - long/short
+      - prime broker
+      - risk parity
+      - CTA
+      - net long
+      - short interest
+      - buy-side
+    tickers: []
+    catalysts:
+      - activist stake
+      - squeeze setup
+      - flow-driven move
+    headwinds:
+      - crowded unwind
+      - deleveraging
+      - style rotation
+
+  china_tech_policy:
+    label: "China Tech & Policy"
+    description: "Policy, localization, export controls, domestic champions."
+    keywords:
+      - export control
+      - entity list
+      - localization
+      - China tech
+      - SMIC
+      - Huawei
+      - Ascend
+      - subsidy
+      - anti-dumping
+    tickers: [BABA, PDD, BIDU, JD, TSM]
+    catalysts:
+      - stimulus
+      - localization mandate
+    headwinds:
+      - sanctions
+      - regulatory crackdown
+
+  energy_transition:
+    label: "Energy / Power for AI"
+    description: "Power scarcity, nuclear, utilities benefiting from AI load."
+    keywords:
+      - nuclear
+      - SMR
+      - utility
+      - power demand
+      - grid
+      - natural gas
+      - data center power
+    tickers: [VST, CEG, TLN, SMR]
+    catalysts:
+      - power PPAs
+      - nuclear restart
+    headwinds:
+      - permitting delays
+      - gas price spike
+
+noise_signals:
+  # High = more likely meme/hype; down-weighted but not discarded.
+  high:
+    - to the moon
+    - rocket
+    - yolo
+    - diamond hands
+    - tendies
+    - ape
+    - moonshot guaran
+    - 100x
+    - guaranteed
+    - not financial advice but buy
+    - pumping
+    - bagholder
+  medium:
+    - meme
+    - short squeeze
+    - gamma squeeze
+    - FOMO
+    - must buy
+    - insane upside
+    - life changing
+  # Soft positive quality signals (buy-side / research tone)
+  quality:
+    - 13F
+    - positioning
+    - catalyst
+    - headwind
+    - thesis
+    - valuation
+    - unit economics
+    - channel check
+    - expert network
+    - supply chain
+    - variant perception
+    - risk/reward
+    - base case
+    - bear case
+    - bull case

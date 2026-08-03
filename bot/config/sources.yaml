@@ -1,0 +1,171 @@
+# Curated market-leaning source set.
+# Prefer custom-domain RSS — bare *.substack.com/feed often 403s from datacenter IPs.
+# Picked from widely cited finance newsletter roundups (e.g. Edwin Dorsey toolkit,
+# Behind the Balance Sheet Substack rankings) + feeds we can actually fetch live.
+# Twitter accounts used when TWITTER_BEARER_TOKEN is set; else fixtures fill gaps.
+
+substack:
+  # --- Broad markets / finance (primary) ---
+  - name: "The Diff"
+    url: "https://www.thediff.co/feed"
+    weight: 1.05
+    tags: [markets, tech, finance]
+  - name: "Net Interest"
+    url: "https://www.netinterest.co/feed"
+    weight: 1.05
+    tags: [finance, banks, markets]
+  - name: "Doomberg"
+    url: "https://newsletter.doomberg.com/feed"
+    weight: 1.0
+    tags: [energy, commodities, macro]
+  - name: "The Felder Report"
+    url: "https://thefelderreport.com/feed"
+    weight: 1.0
+    tags: [markets, macro, valuation]
+  - name: "Citrini Research"
+    url: "https://www.citriniresearch.com/feed"
+    weight: 1.05
+    tags: [markets, thematic, equities]
+  - name: "Scuttleblurb"
+    url: "https://www.scuttleblurb.com/feed"
+    weight: 1.0
+    tags: [equities, research]
+  - name: "Lyn Alden"
+    url: "https://www.lynalden.com/feed/"
+    weight: 1.0
+    tags: [macro, markets]
+  - name: "Of Dollars and Data"
+    url: "https://ofdollarsanddata.com/feed"
+    weight: 0.9
+    tags: [markets, data]
+  - name: "A Wealth of Common Sense"
+    url: "https://awealthofcommonsense.com/feed"
+    weight: 0.9
+    tags: [markets, asset_allocation]
+  - name: "Money Stuff (Matt Levine)"
+    url: "https://www.bloomberg.com/opinion/authors/ARbTQlRLRjE/matthew-s-levine.rss"
+    weight: 0.95
+    tags: [markets, finance, legal]
+  - name: "Abnormal Returns"
+    url: "https://abnormalreturns.com/feed/"
+    weight: 0.85
+    tags: [markets, links]
+  - name: "The Reformed Broker"
+    url: "https://thereformedbroker.com/feed/"
+    weight: 0.85
+    tags: [markets, equities]
+  - name: "Ritholtz"
+    url: "https://ritholtz.com/feed/"
+    weight: 0.85
+    tags: [markets, macro]
+  - name: "Musings on Markets"
+    url: "https://aswathdamodaran.blogspot.com/feeds/posts/default?alt=rss"
+    weight: 1.0
+    tags: [valuation, equities]
+  - name: "Calculated Risk"
+    url: "https://www.calculatedriskblog.com/feeds/posts/default?alt=rss"
+    weight: 0.9
+    tags: [macro, housing, credit]
+  - name: "Macro Ops"
+    url: "https://macro-ops.com/feed/"
+    weight: 0.95
+    tags: [macro, trading]
+  - name: "FT Alphaville"
+    url: "https://www.ft.com/alphaville?format=rss"
+    weight: 0.95
+    tags: [markets, finance]
+  - name: "Compounding Quality"
+    url: "https://www.compoundingquality.net/feed"
+    weight: 0.85
+    tags: [quality, equities]
+
+  # --- Sector / thematic (kept, not dominant) ---
+  - name: "Semianalysis"
+    url: "https://www.semianalysis.com/feed"
+    weight: 0.95
+    tags: [semiconductors, ai]
+  - name: "Asianometry"
+    url: "https://www.asianometry.com/feed"
+    weight: 0.9
+    tags: [semiconductors, china]
+  - name: "ChinaTalk"
+    url: "https://www.chinatalk.media/feed"
+    weight: 0.9
+    tags: [china, policy]
+  - name: "Stratechery"
+    url: "https://stratechery.com/feed/"
+    weight: 0.9
+    tags: [tech, strategy]
+  - name: "Noahpinion"
+    url: "https://www.noahpinion.blog/feed"
+    weight: 0.8
+    tags: [macro, policy]
+
+twitter:
+  # Broader markets + a few thematic specialists
+  accounts:
+    - handle: "ByrneHobart"
+      weight: 1.05
+      tags: [markets, tech]
+    - handle: "macroalf"
+      weight: 1.0
+      tags: [macro, positioning]
+    - handle: "hmeisenzahl"
+      weight: 0.9
+      tags: [markets]
+    - handle: "jsblokland"
+      weight: 0.9
+      tags: [markets, charts]
+    - handle: "LisaAbramowicz1"
+      weight: 0.9
+      tags: [markets, credit]
+    - handle: "NickTimiraos"
+      weight: 0.9
+      tags: [fed, macro]
+    - handle: "biancoresearch"
+      weight: 0.95
+      tags: [macro, rates]
+    - handle: "LizAnnSonders"
+      weight: 0.9
+      tags: [markets, equities]
+    - handle: "jessefelder"
+      weight: 0.95
+      tags: [markets, valuation]
+    - handle: "LynAldenContact"
+      weight: 0.95
+      tags: [macro]
+    - handle: "Brad_Setser"
+      weight: 0.9
+      tags: [china, policy]
+    - handle: "semianalysis_"
+      weight: 0.9
+      tags: [semiconductors, ai]
+    - handle: "dylan522p"
+      weight: 0.9
+      tags: [semiconductors, ai]
+    - handle: "zerohedge"
+      weight: 0.4
+      tags: [markets, noise]
+      noise_bias: 0.35
+    - handle: "WSBChairman"
+      weight: 0.25
+      tags: [retail, noise]
+      noise_bias: 0.7
+  queries:
+    - '("hedge fund" OR 13F OR positioning OR "crowded trade" OR "prime broker") (long OR short OR equity)'
+    - '(catalyst OR headwind OR thesis) (earnings OR guidance OR valuation) (stock OR equity OR market)'
+    - '(CXMT OR HBM OR "memory pricing") (stock OR semiconductor OR Micron)'
+    - '(Kimi OR Moonshot OR DeepSeek) (AI OR LLM OR market OR stock)'
+    - '(Fed OR "rate cut" OR "soft landing" OR stagflation) (markets OR stocks OR bonds)'
+
+scoring:
+  min_score_to_surface: 0.35
+  noise_penalty_cap: 0.55
+  source_weight_floor: 0.2
+  max_items_per_digest: 12
+  # Hard drop anything older than this (markets move fast).
+  lookback_hours: 336  # 14 days
+  # Extra score for fresher posts inside the window.
+  recency_full_boost_hours: 48   # full boost if <= 2 days old
+  recency_half_life_hours: 168   # boost fades over ~7 days
+  recency_max_boost: 0.18
