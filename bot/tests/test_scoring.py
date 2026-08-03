@@ -99,7 +99,11 @@ def test_noise_filter_quality_offsets(themes_cfg):
 
 
 @pytest.mark.asyncio
-async def test_demo_pipeline_digest():
+async def test_pipeline_digest(monkeypatch):
+    monkeypatch.setenv("BOT_MODE", "demo")
+    from config import reload_config
+
+    reload_config()
     pipe = IdeaPipeline()
     assert pipe.settings.is_demo
     ideas = await pipe.digest(limit=10)
@@ -111,6 +115,7 @@ async def test_demo_pipeline_digest():
     top = ideas[0]
     if wsb:
         assert top.score >= wsb.score
+    reload_config()
 
 
 @pytest.mark.asyncio
