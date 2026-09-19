@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-moomoo = ["moomoo-api>=9.2.5208"]
+moomoo = ["moomoo-api==10.11.7108"]
 test = ["pytest>=8.3"]
 
 [project.scripts]

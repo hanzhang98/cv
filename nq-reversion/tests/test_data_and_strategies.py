@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from nq_reversion.data import normalize_bars
-from nq_reversion.strategies import asia_shock_setups
+from nq_reversion.strategies import asia_shock_setups, us_open_rejection_setups
 
 
 def test_normalize_moomoo_columns_and_timezone():
@@ -40,3 +40,32 @@ def test_asia_shock_uses_signal_close_then_backtester_can_enter_next_bar():
     assert len(setups) == 1
     assert setups[0].signal_time == index[-2]
     assert setups[0].side == -1
+
+
+def test_us_open_requires_rejection_after_overnight_displacement():
+    local_index = pd.date_range(
+        "2026-01-05 14:00", "2026-01-06 09:34", freq="1min", tz="America/New_York"
+    )
+    close = np.full(len(local_index), 20000.0)
+    overnight_start = pd.Timestamp("2026-01-05 18:00", tz="America/New_York")
+    overnight = local_index >= overnight_start
+    close[overnight] = np.linspace(20000, 20050, overnight.sum())
+    open_start = pd.Timestamp("2026-01-06 09:30", tz="America/New_York")
+    opening = local_index >= open_start
+    close[opening] = [20058, 20056, 20053, 20049, 20045]
+    frame = pd.DataFrame(
+        {
+            "open": close,
+            "high": close + 1,
+            "low": close - 1,
+            "close": close,
+            "volume": 100,
+        },
+        index=local_index.tz_convert("UTC"),
+    )
+    frame.loc[open_start.tz_convert("UTC"), "high"] = 20060
+
+    setups = us_open_rejection_setups(frame)
+    assert len(setups) == 1
+    assert setups[0].side == -1
+    assert setups[0].signal_time == pd.Timestamp("2026-01-06 14:34", tz="UTC")
