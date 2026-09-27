@@ -68,6 +68,12 @@ def main() -> None:
                     "liquidity_usd": row["liquidity_usd"],
                     "volume_24h_usd": row["volume_24h_usd"],
                     "price_usd": row["price_usd"],
+                    "mint_authority_revoked": row["mint_authority_revoked"],
+                    "freeze_authority_revoked": row["freeze_authority_revoked"],
+                    "raw_largest_account_pct": row["raw_largest_account_pct"],
+                    "raw_top20_accounts_pct": row["raw_top20_accounts_pct"],
+                    "risk_error": row["risk_error"],
+                    "manual_label": row["manual_label"],
                 }
             )
         print(json.dumps(output, indent=2))

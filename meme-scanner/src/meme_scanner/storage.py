@@ -357,10 +357,16 @@ class Store:
             SELECT
                 t.symbol, t.name, t.address, d.status, d.score, d.reasons_json,
                 d.estimated_round_trip_cost_bps, s.liquidity_usd, s.volume_24h_usd,
-                s.price_usd
+                s.price_usd, tr.mint_authority_revoked,
+                tr.freeze_authority_revoked, tr.raw_largest_account_pct,
+                tr.raw_top20_accounts_pct, tr.error AS risk_error,
+                l.category AS manual_label
             FROM decisions d
             JOIN tokens t ON t.id = d.token_id
             JOIN snapshots s ON s.run_id = d.run_id AND s.token_id = d.token_id
+            LEFT JOIN token_risks tr
+                ON tr.run_id = d.run_id AND tr.token_id = d.token_id
+            LEFT JOIN labels l ON l.token_id = d.token_id
             WHERE d.run_id = (SELECT MAX(id) FROM runs WHERE status = 'completed')
               AND s.id = (
                 SELECT s2.id FROM snapshots s2
