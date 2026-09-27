@@ -1,0 +1,30 @@
+database_path = "data/meme_scanner.sqlite3"
+
+[discovery]
+network = "solana"
+pages_per_source = 1
+sources = ["pools", "trending_pools", "new_pools"]
+request_interval_seconds = 6.1
+user_agent = "meme-scanner/0.1 (forward research journal)"
+
+[eligibility]
+minimum_age_days = 90
+minimum_liquidity_usd = 1000000
+minimum_volume_24h_usd = 500000
+intended_order_usd = 1000
+base_round_trip_cost_bps = 100
+maximum_round_trip_cost_bps = 200
+minimum_forward_history_days = 90
+maximum_range_position = 0.25
+require_community_label = true
+require_revoked_authorities = true
+
+[risk]
+solana_rpc_url = "https://api.mainnet-beta.solana.com"
+request_interval_seconds = 0.5
+maximum_retries = 4
+
+[paper]
+signal_cooldown_days = 30
+stale_runs_before_zero = 3
+maximum_tracking_days = 90
