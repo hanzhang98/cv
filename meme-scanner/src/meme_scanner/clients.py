@@ -146,10 +146,15 @@ class SolanaClient:
         self,
         endpoint: str = "https://api.mainnet-beta.solana.com",
         user_agent: str = "meme-scanner/0.1 (forward research journal)",
+        request_interval_seconds: float = 0.5,
+        maximum_retries: int = 4,
     ):
         self.endpoint = endpoint
         self.user_agent = user_agent
+        self.request_interval_seconds = request_interval_seconds
+        self.maximum_retries = maximum_retries
         self._request_id = 0
+        self._last_request_at = 0.0
 
     def _call(self, method: str, parameters: Iterable[Any]) -> dict[str, Any]:
         self._request_id += 1
@@ -161,18 +166,36 @@ class SolanaClient:
                 "params": list(parameters),
             }
         ).encode()
-        request = Request(
-            self.endpoint,
-            data=body,
-            headers={
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "User-Agent": self.user_agent,
-            },
-            method="POST",
-        )
-        with urlopen(request, timeout=30) as response:
-            payload = json.load(response)
+        payload = None
+        for attempt in range(self.maximum_retries + 1):
+            wait = self.request_interval_seconds - (
+                time.monotonic() - self._last_request_at
+            )
+            if wait > 0:
+                time.sleep(wait)
+            request = Request(
+                self.endpoint,
+                data=body,
+                headers={
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "User-Agent": self.user_agent,
+                },
+                method="POST",
+            )
+            try:
+                with urlopen(request, timeout=30) as response:
+                    payload = json.load(response)
+                break
+            except HTTPError as exc:
+                if exc.code != 429 or attempt >= self.maximum_retries:
+                    raise
+                retry_after = float(exc.headers.get("Retry-After", 2**attempt))
+                time.sleep(max(retry_after, 2**attempt))
+            finally:
+                self._last_request_at = time.monotonic()
+        if payload is None:
+            raise PublicAPIError(f"Solana {method} returned no response")
         if payload.get("error"):
             raise PublicAPIError(f"Solana {method} failed: {payload['error']}")
         return payload["result"]

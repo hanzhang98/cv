@@ -37,6 +37,13 @@ class EligibilityConfig:
 
 
 @dataclass(frozen=True)
+class RiskConfig:
+    solana_rpc_url: str = "https://api.mainnet-beta.solana.com"
+    request_interval_seconds: float = 0.5
+    maximum_retries: int = 4
+
+
+@dataclass(frozen=True)
 class PaperConfig:
     signal_cooldown_days: int = 30
     stale_runs_before_zero: int = 3
@@ -48,6 +55,7 @@ class AppConfig:
     database_path: str = "data/meme_scanner.sqlite3"
     discovery: DiscoveryConfig = DiscoveryConfig()
     eligibility: EligibilityConfig = EligibilityConfig()
+    risk: RiskConfig = RiskConfig()
     paper: PaperConfig = PaperConfig()
 
 
@@ -71,7 +79,7 @@ def load_config(path: str | Path | None = None) -> AppConfig:
         return AppConfig()
     with Path(path).open("rb") as handle:
         raw = tomllib.load(handle)
-    allowed = {"database_path", "discovery", "eligibility", "paper"}
+    allowed = {"database_path", "discovery", "eligibility", "risk", "paper"}
     unknown = set(raw) - allowed
     if unknown:
         raise ValueError(f"unknown top-level settings: {sorted(unknown)}")
@@ -79,5 +87,6 @@ def load_config(path: str | Path | None = None) -> AppConfig:
         database_path=raw.get("database_path", AppConfig.database_path),
         discovery=_section(DiscoveryConfig, raw.get("discovery", {})),
         eligibility=_section(EligibilityConfig, raw.get("eligibility", {})),
+        risk=_section(RiskConfig, raw.get("risk", {})),
         paper=_section(PaperConfig, raw.get("paper", {})),
     )

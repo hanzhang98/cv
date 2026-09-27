@@ -44,7 +44,12 @@ def run_daily_scan(
 ) -> dict[str, int]:
     observed_at = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     gecko = gecko or GeckoTerminalClient(config.discovery)
-    solana = solana or SolanaClient(user_agent=config.discovery.user_agent)
+    solana = solana or SolanaClient(
+        endpoint=config.risk.solana_rpc_url,
+        user_agent=config.discovery.user_agent,
+        request_interval_seconds=config.risk.request_interval_seconds,
+        maximum_retries=config.risk.maximum_retries,
+    )
     store = Store(config.database_path)
     run_id = store.start_run(observed_at)
     try:

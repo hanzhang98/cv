@@ -91,6 +91,11 @@ Back up `data/meme_scanner.sqlite3`. Do not run the database from ephemeral CI:
 losing old rejected tokens recreates the survivorship bias this tool exists to
 avoid.
 
+Solana's shared public RPC can return HTTP 429. The scanner retries with bounded
+backoff and then records risk data as unavailable, which blocks qualification.
+For reliable daily operation, set `risk.solana_rpc_url` to a trusted dedicated
+RPC endpoint supplied through local configuration; do not commit credentials.
+
 ## Data limitations
 
 - Public APIs can change, rate-limit, or omit pools.

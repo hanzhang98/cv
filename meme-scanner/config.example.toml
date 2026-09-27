@@ -19,6 +19,11 @@ maximum_range_position = 0.25
 require_community_label = true
 require_revoked_authorities = true
 
+[risk]
+solana_rpc_url = "https://api.mainnet-beta.solana.com"
+request_interval_seconds = 0.5
+maximum_retries = 4
+
 [paper]
 signal_cooldown_days = 30
 stale_runs_before_zero = 3
