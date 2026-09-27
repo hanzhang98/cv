@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meme-scanner"
+version = "0.1.0"
+description = "Forward-only Solana token scanner and paper-tracking journal"
+readme = "README.md"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+test = ["pytest>=8.3"]
+
+[project.scripts]
+meme-scanner = "meme_scanner.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
